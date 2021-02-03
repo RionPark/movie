@@ -94,3 +94,8 @@
     margin-bottom: -15%;
     color: #495057;
 }
+.clear{
+	width:0;
+	height:0;
+	clear:both;
+}

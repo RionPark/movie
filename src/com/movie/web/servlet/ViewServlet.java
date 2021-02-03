@@ -14,6 +14,11 @@ public class ViewServlet extends HttpServlet {
     private static final String PREFIX = "/WEB-INF";
     private static final String SUFFIX = ".jsp";
    
+    public static void goPage(HttpServletRequest request,HttpServletResponse response
+    		, String path) throws ServletException, IOException {
+    	RequestDispatcher rd = request.getRequestDispatcher(path);
+    	rd.forward(request, response);
+    }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getRequestURI();
 		RequestDispatcher rd = request.getRequestDispatcher(PREFIX + path + SUFFIX);

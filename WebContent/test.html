@@ -7,7 +7,8 @@
 </head>
 <body>
 <form onsubmit="return check();">
-<input type="text" id="name" name="name">
+<input type="text" id="name" name="name"><br>
+<input type="text" id="id" name="id"><br>
 <button>확인</button>
 </form>
 <script>
@@ -23,9 +24,13 @@ function validation(id,min,max,msg){
 }
 
 function check(){
-	validation('#name',2,4,'이름을 입력해야지!!');
-
-	return false;
+	if(!validation('#name',2,4,'이름을 입력해야지!!')){
+		return false;
+	}
+	if(!validation('#id',2,4,'아이디는 2글자 이상 4글자 이하입니다.')){
+		return false;
+	}
+	return true;
 }
 </script>
 </body>
