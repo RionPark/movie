@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+var str = '1';
+if(!str){
+	alert('어라? 빈문자열은 false인가보다');
+}
+str = 1;
+if(!str){
+	alert('어라? 0도 false인가보다');
+}
+str = true;
+if(!str){
+	alert('false는 당연히 false지');
+}
+str = null;
+if(!str){
+	alert('어라? null도 false인가보다');
+}
+
+str = undefined;
+if(!str){
+	alert('어라? undefined도 false인가보다');
+}
+</script>
+</body>
+</html>

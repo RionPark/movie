@@ -6,10 +6,27 @@
 <script src="/common.js"></script>
 </head>
 <body>
-<button onclick="hello(this)">안녕</button>
-<button onclick="hello(this)">hello</button>
-<button onclick="hello(this)">오하요</button>
-<button onclick="hello(this)">...</button>
+<form onsubmit="return check();">
+<input type="text" id="name" name="name">
+<button>확인</button>
+</form>
+<script>
+function validation(id,min,max,msg){
+	var obj = document.querySelector(id);
+	if( (min && obj.value.trim().length<min) || (max && obj.value.trim().length>max)){
+		alert(msg);
+		obj.value='';
+		obj.focus();
+		return false;
+	}
+	return true;
+}
 
+function check(){
+	validation('#name',2,4,'이름을 입력해야지!!');
+
+	return false;
+}
+</script>
 </body>
 </html>
