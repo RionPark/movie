@@ -5,10 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/css/common.css">
-<script src="/resources/js/jquery.min.js"></script>
-<script src="/resources/js/bootstrap.min.js"></script>
+<jsp:include page="/WEB-INF/views/include/head.jsp"/>
 </head>
 <body>
 <script>
