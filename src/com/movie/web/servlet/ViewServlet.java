@@ -16,7 +16,7 @@ public class ViewServlet extends HttpServlet {
    
     public static void goPage(HttpServletRequest request,HttpServletResponse response
     		, String path) throws ServletException, IOException {
-    	RequestDispatcher rd = request.getRequestDispatcher(path);
+    	RequestDispatcher rd = request.getRequestDispatcher(PREFIX + path + SUFFIX);
     	rd.forward(request, response);
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
