@@ -66,14 +66,18 @@
 		}
 		return true;
 	}
+	function goPage(url){
+		location.href = url;
+	}
 </script>
+	<jsp:include page="/WEB-INF/views/include/menu.jsp"></jsp:include>
 	<div class="container register">
 		<div class="row">
 			<div class="col-md-3 register-left">
 				<img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
 				<h3>안녕하세요</h3>
 				<p>저희 영화관에 오신것을 환영합니다.</p>
-				<input type="button" name="ui_" value="로그인" /><br />
+				<input type="button" name="ui_" value="로그인" onclick="goPage('/views/user/login')"/><br />
 			</div>
 			<div class="col-md-9 register-right">
 				<ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">

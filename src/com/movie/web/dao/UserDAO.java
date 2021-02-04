@@ -7,6 +7,7 @@ public interface UserDAO {
 
 	List<Map<String,String>> selectUserList(Map<String,String> user);
 	Map<String,String> selectUser(int uiNum);
+	Map<String,String> selectUser(Map<String,String> user);
 	int insertUser(Map<String,String> user);
 	int updateUser(Map<String,String> user);
 	int deleteUser(int uiNum);

@@ -55,4 +55,20 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	@Override
+	public Map<String, String> login(Map<String, String> user) {
+		Map<String, String> rMap = userDAO.selectUser(user);
+		if(rMap==null) {
+			rMap = new HashMap<>();
+			rMap.put("msg", "없는 아이디입니다.");
+		}else {
+			rMap.put("msg", "로그인에 성공하였습니다.");
+			String uiPwd = rMap.get("ui_pwd");
+			if(!uiPwd.equals(user.get("ui_pwd"))) {
+				rMap.put("msg", "비밀번호가 틀렸습니다.");
+			}
+		}
+		return rMap;
+	}
+
 }

@@ -25,36 +25,36 @@ public class UserServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String name = request.getParameter("ui_name");
-		String id = request.getParameter("ui_id");
-		String email = request.getParameter("ui_email");
-		String pwd = request.getParameter("ui_pwd");
-		String address = request.getParameter("ui_address");
+		String url = request.getRequestURI();
+		int idx = url.lastIndexOf("/");
+		String cmd = url.substring(idx+1);
 		String[] genres = request.getParameterValues("ui_genre");
 		String genre = "";
-		for(int i=0;i<genres.length;i++) {
-			genre += genres[i] + ",";
+		if(genres!=null) {
+			for(int i=0;i<genres.length;i++) {
+				genre += genres[i] + ",";
+			}
+			genre = genre.substring(0,genre.length()-1);
 		}
-		genre = genre.substring(0,genre.length()-1);
-		
-		String phone1 = request.getParameter("ui_phone1");
-		String phone2 = request.getParameter("ui_phone2");
-		String hint = request.getParameter("ui_hint");
-		String answer = request.getParameter("ui_answer");
 		Map<String,String> user = new HashMap<>();
-		user.put("ui_name", name);
-		user.put("ui_id", id);
-		user.put("ui_email", email);
-		user.put("ui_pwd", pwd);
-		user.put("ui_address", address);
+		user.put("ui_name", request.getParameter("ui_name"));
+		user.put("ui_id", request.getParameter("ui_id"));
+		user.put("ui_email", request.getParameter("ui_email"));
+		user.put("ui_pwd", request.getParameter("ui_pwd"));
+		user.put("ui_address", request.getParameter("ui_address"));
 		user.put("ui_genre", genre);
-		user.put("ui_phone1", phone1);
-		user.put("ui_phone2", phone2);
-		user.put("ui_hint", hint);
-		user.put("ui_answer", answer);
-		Map<String,String> rMap = userService.insertUser(user);
-		request.setAttribute("rMap", rMap);
-		ViewServlet.goPage(request, response, "/views/common/msg");
+		user.put("ui_phone1", request.getParameter("ui_phone1"));
+		user.put("ui_phone2", request.getParameter("ui_phone2"));
+		user.put("ui_hint", request.getParameter("ui_hint"));
+		user.put("ui_answer", request.getParameter("ui_answer"));
+		if("login".equals(cmd)) {
+			Map<String,String> rMap = userService.login(user);
+			System.out.println(rMap);
+		}else if("insert".equals(cmd)) {
+			Map<String,String> rMap = userService.insertUser(user);
+		}
+//		request.setAttribute("rMap", rMap);
+//		ViewServlet.goPage(request, response, "/views/common/msg");
 	}
 
 }

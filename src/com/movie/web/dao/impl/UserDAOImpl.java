@@ -2,6 +2,7 @@ package com.movie.web.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,19 +81,38 @@ public class UserDAOImpl implements UserDAO{
 		return 0;
 	}
 
-	public static void main(String[] args) {
-		UserDAO userDAO = new UserDAOImpl();
-		Map<String,String> user = new HashMap<>();
-		user.put("ui_name", "name");
-		user.put("ui_id", "id");
-		user.put("ui_email", "email");
-		user.put("ui_pwd", "pwd");
-		user.put("ui_address", "address");
-		user.put("ui_genre", "genre");
-		user.put("ui_phone1", "010");
-		user.put("ui_phone2", "62080018");
-		user.put("ui_hint", "hint");
-		user.put("ui_answer", "answer");
-		System.out.println(userDAO.insertUser(user));
+	@Override
+	public Map<String, String> selectUser(Map<String, String> user) {
+		String sql = "select * from user_info where ui_id=?";
+		Connection con = DBConn.getConn();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, user.get("ui_id"));
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Map<String, String> rUser = new HashMap<>();
+				rUser.put("ui_num", rs.getString("ui_num"));
+				rUser.put("ui_id", rs.getString("ui_id"));
+				rUser.put("ui_pwd", rs.getString("ui_pwd"));
+				rUser.put("ui_name", rs.getString("ui_name"));
+				rUser.put("ui_address", rs.getString("ui_address"));
+				rUser.put("ui_credat", rs.getString("credat"));
+				rUser.put("ui_cretim", rs.getString("cretim"));
+				rUser.put("ui_moddat", rs.getString("moddat"));
+				rUser.put("ui_modtim", rs.getString("modtim"));
+				rUser.put("ui_phone1", rs.getString("ui_phone1"));
+				rUser.put("ui_phone2", rs.getString("ui_phone2"));
+				rUser.put("ui_genre", rs.getString("ui_genre"));
+				rUser.put("ui_email", rs.getString("ui_email"));
+				return rUser;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBConn.close(con,ps,rs);
+		}
+		return null;
 	}
 }
