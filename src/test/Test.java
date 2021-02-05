@@ -1,16 +1,18 @@
 package test;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 public class Test {
 
-	public static void include() {
-		System.out.println("안녕 난 left라고해");
-	}
 	
 	public static void main(String[] args) {
-		String str = "안녕 난 str이라고해";
-		System.out.println("안녕 난 test라고해");
+		String genre="스릴러,반전,추리";
 
-		System.out.println("안녕 난 left라고해");
-		
+		System.out.println(genre.contains("스릴러")?"checked":"");
+		System.out.println(genre.contains("반전")?"checked":"");
+		System.out.println(genre.contains("추리")?"checked":"");
+		System.out.println(genre.contains("미스터리")?"checked":"");
 	}
 }

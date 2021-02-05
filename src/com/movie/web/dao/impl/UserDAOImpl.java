@@ -20,7 +20,38 @@ public class UserDAOImpl implements UserDAO{
 
 	@Override
 	public Map<String, String> selectUser(int uiNum) {
-		// TODO Auto-generated method stub
+		String sql = "select * from user_info where ui_num=?";
+		Connection con = DBConn.getConn();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, uiNum);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Map<String, String> rUser = new HashMap<>();
+				rUser.put("ui_num", rs.getString("ui_num"));
+				rUser.put("ui_id", rs.getString("ui_id"));
+				rUser.put("ui_pwd", rs.getString("ui_pwd"));
+				rUser.put("ui_name", rs.getString("ui_name"));
+				rUser.put("ui_address", rs.getString("ui_address"));
+				rUser.put("ui_credat", rs.getString("credat"));
+				rUser.put("ui_cretim", rs.getString("cretim"));
+				rUser.put("ui_moddat", rs.getString("moddat"));
+				rUser.put("ui_modtim", rs.getString("modtim"));
+				rUser.put("ui_phone1", rs.getString("ui_phone1"));
+				rUser.put("ui_phone2", rs.getString("ui_phone2"));
+				rUser.put("ui_genre", rs.getString("ui_genre"));
+				rUser.put("ui_email", rs.getString("ui_email"));
+				rUser.put("ui_hint", rs.getString("ui_hint"));
+				rUser.put("ui_answer", rs.getString("ui_answer"));
+				return rUser;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBConn.close(con,ps,rs);
+		}
 		return null;
 	}
 
@@ -107,6 +138,8 @@ public class UserDAOImpl implements UserDAO{
 				rUser.put("ui_phone2", rs.getString("ui_phone2"));
 				rUser.put("ui_genre", rs.getString("ui_genre"));
 				rUser.put("ui_email", rs.getString("ui_email"));
+				rUser.put("ui_hint", rs.getString("ui_hint"));
+				rUser.put("ui_answer", rs.getString("ui_answer"));
 				return rUser;
 			}
 		}catch(Exception e) {

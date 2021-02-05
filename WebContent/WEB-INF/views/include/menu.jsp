@@ -41,7 +41,7 @@ if(user==null){
 <%
 }else{
 %>
-			<a class="nav-link" href=""><%=user.get("ui_name")%>님 정보 보기</a>
+			<a class="nav-link" href="/views/user/info"><%=user.get("ui_name")%>님 정보 보기</a>
 			
           </li>
           <li class="nav-item">

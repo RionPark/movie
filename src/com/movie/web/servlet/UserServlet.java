@@ -12,62 +12,48 @@ import javax.servlet.http.HttpSession;
 
 import com.movie.web.service.UserService;
 import com.movie.web.service.impl.UserServiceImpl;
+import com.movie.web.util.MapConvert;
 
-
-public class UserServlet extends HttpServlet {
+public class UserServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private UserService userService = new UserServiceImpl();
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = request.getRequestURI();
-		int idx = url.lastIndexOf("/");
-		String cmd = url.substring(idx+1);
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String cmd = MapConvert.getCmd(request.getRequestURI());
+		Map<String,String> user = MapConvert.getMap(request.getParameterMap());
+		String path = "/views/user/info";
 		if("logout".equals(cmd)) {
 			HttpSession session = request.getSession();
 			session.invalidate();
-			response.sendRedirect("/views/user/login");
+			response.sendRedirect("/");
+			return;
+		}else if("info".equals(cmd)) {
+			String uiNumStr = user.get("ui_num");
+			int uiNum = Integer.parseInt(uiNumStr);
+			Map<String,String> rUser = userService.selectUser(uiNum);
+			request.setAttribute("user", rUser);
 		}
+		ViewServlet.goPage(request, response, path);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String url = request.getRequestURI();
-		int idx = url.lastIndexOf("/");
-		String cmd = url.substring(idx+1);
-		String[] genres = request.getParameterValues("ui_genre");
-		String genre = "";
-		if(genres!=null) {
-			for(int i=0;i<genres.length;i++) {
-				genre += genres[i] + ",";
-			}
-			genre = genre.substring(0,genre.length()-1);
-		}
-		Map<String,String> user = new HashMap<>();
-		user.put("ui_name", request.getParameter("ui_name"));
-		user.put("ui_id", request.getParameter("ui_id"));
-		user.put("ui_email", request.getParameter("ui_email"));
-		user.put("ui_pwd", request.getParameter("ui_pwd"));
-		user.put("ui_address", request.getParameter("ui_address"));
-		user.put("ui_genre", genre);
-		user.put("ui_phone1", request.getParameter("ui_phone1"));
-		user.put("ui_phone2", request.getParameter("ui_phone2"));
-		user.put("ui_hint", request.getParameter("ui_hint"));
-		user.put("ui_answer", request.getParameter("ui_answer"));
-		String path = "/views/common/msg";
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String cmd = MapConvert.getCmd(request.getRequestURI());
+		Map<String,String> user = MapConvert.getMap(request.getParameterMap());
 		Map<String,String> rMap = new HashMap<>();
+		String path = "/views/user/login";
 		if("login".equals(cmd)) {
 			rMap = userService.login(user);
-			path = "/views/user/login";
 			if("1".equals(rMap.get("result"))) {
-				path = "/views/index";
-				HttpSession session  = request.getSession();
+				HttpSession session = request.getSession();
 				session.setAttribute("user", rMap);
+				response.sendRedirect("/");
+				return;
 			}
 		}else if("insert".equals(cmd)) {
-			rMap = userService.insertUser(user);
+			rMap = userService.login(user);
 		}
 		request.setAttribute("rMap", rMap);
 		ViewServlet.goPage(request, response, path);
 	}
-
 }

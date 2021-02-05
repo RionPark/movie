@@ -19,8 +19,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Map<String, String> selectUser(int uiNum) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDAO.selectUser(uiNum);
 	}
 
 	@Override
