@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.movie.web.service.UserService;
 import com.movie.web.service.impl.UserServiceImpl;
@@ -19,8 +19,14 @@ public class UserServlet extends HttpServlet {
 	private UserService userService = new UserServiceImpl();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String url = request.getRequestURI();
+		int idx = url.lastIndexOf("/");
+		String cmd = url.substring(idx+1);
+		if("logout".equals(cmd)) {
+			HttpSession session = request.getSession();
+			session.invalidate();
+			response.sendRedirect("/views/user/login");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,14 +53,21 @@ public class UserServlet extends HttpServlet {
 		user.put("ui_phone2", request.getParameter("ui_phone2"));
 		user.put("ui_hint", request.getParameter("ui_hint"));
 		user.put("ui_answer", request.getParameter("ui_answer"));
+		String path = "/views/common/msg";
+		Map<String,String> rMap = new HashMap<>();
 		if("login".equals(cmd)) {
-			Map<String,String> rMap = userService.login(user);
-			System.out.println(rMap);
+			rMap = userService.login(user);
+			path = "/views/user/login";
+			if("1".equals(rMap.get("result"))) {
+				path = "/views/index";
+				HttpSession session  = request.getSession();
+				session.setAttribute("user", rMap);
+			}
 		}else if("insert".equals(cmd)) {
-			Map<String,String> rMap = userService.insertUser(user);
+			rMap = userService.insertUser(user);
 		}
-//		request.setAttribute("rMap", rMap);
-//		ViewServlet.goPage(request, response, "/views/common/msg");
+		request.setAttribute("rMap", rMap);
+		ViewServlet.goPage(request, response, path);
 	}
 
 }

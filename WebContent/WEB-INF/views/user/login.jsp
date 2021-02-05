@@ -1,3 +1,4 @@
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -35,6 +36,13 @@
 			<label> <input type="checkbox" value="remember-me">
 				아이디 기억하기
 			</label>
+<%
+Map<String,String> rMap = (Map<String,String>)request.getAttribute("rMap");
+out.println("rMap : " + rMap + "<br>");
+if(rMap!=null){
+	out.println("<br><b><code>" + rMap.get("msg") + "</code></b>");
+}
+%>
 		</div>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
 		<p class="mt-5 mb-3 text-muted text-center">&copy; 2021</p>

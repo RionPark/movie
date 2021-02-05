@@ -83,13 +83,14 @@ public class UserDAOImpl implements UserDAO{
 
 	@Override
 	public Map<String, String> selectUser(Map<String, String> user) {
-		String sql = "select * from user_info where ui_id=?";
+		String sql = "select * from user_info where ui_id=? and ui_pwd=?";
 		Connection con = DBConn.getConn();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, user.get("ui_id"));
+			ps.setString(2, user.get("ui_pwd"));
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				Map<String, String> rUser = new HashMap<>();

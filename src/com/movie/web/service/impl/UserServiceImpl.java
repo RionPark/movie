@@ -60,13 +60,11 @@ public class UserServiceImpl implements UserService {
 		Map<String, String> rMap = userDAO.selectUser(user);
 		if(rMap==null) {
 			rMap = new HashMap<>();
-			rMap.put("msg", "없는 아이디입니다.");
+			rMap.put("msg", "아이디나 비밀번호가 올바르지 않습니다.");
+			rMap.put("result", "0");
 		}else {
 			rMap.put("msg", "로그인에 성공하였습니다.");
-			String uiPwd = rMap.get("ui_pwd");
-			if(!uiPwd.equals(user.get("ui_pwd"))) {
-				rMap.put("msg", "비밀번호가 틀렸습니다.");
-			}
+			rMap.put("result", "1");
 		}
 		return rMap;
 	}
