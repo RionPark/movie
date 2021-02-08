@@ -38,12 +38,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Map<String, String> updateUser(Map<String, String> user) {
 		Map<String, String> rMap = new HashMap<>();
-		rMap.put("msg", "회원가입에 성공하셨습니다.");
 		rMap.put("result", "1");
-		int result = userDAO.insertUser(user);
+		int result = userDAO.updateUser(user);
 		if(result!=1) {
-			rMap.put("msg", "회원가입에 실패하였습니다.");
+			rMap.put("msg", "회원 수정이 실패하였습니다.");
 			rMap.put("result", "0");
+		}else {
+			int uiNum = Integer.parseInt(user.get("ui_num"));
+			rMap = userDAO.selectUser(uiNum);
 		}
 		return rMap;
 	}

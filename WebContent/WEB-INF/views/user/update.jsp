@@ -83,7 +83,7 @@ Map<String, String> user = (Map<String, String>)session.getAttribute("user");
             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
 
             </ul>
-            <form action="/user/insert" method="post" onsubmit="return check()">
+            <form action="/user/update" method="post" onsubmit="return check()">
                <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="home" role="tabpanel"
                      aria-labelledby="home-tab">

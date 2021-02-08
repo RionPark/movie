@@ -102,8 +102,40 @@ public class UserDAOImpl implements UserDAO{
 
 	@Override
 	public int updateUser(Map<String, String> user) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "update user_info"
+				+ " set ui_pwd=?,"
+				+ " ui_genre=?,"
+				+ " ui_email=?,"
+				+ " ui_phone1=?,"
+				+ " ui_phone2=?,"
+				+ " ui_address=?,"
+				+ " ui_hint=?,"
+				+ " ui_answer=?,"
+				+ " moddat=to_char(sysdate,'YYYYMMDD'),"
+				+ " modtim=to_char(sysdate,'HH24MISS')"
+				+ " WHERE ui_num=?";
+		Connection con = DBConn.getConn();
+		PreparedStatement ps = null;
+		int cnt = 0;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, user.get("ui_pwd"));
+			ps.setString(2, user.get("ui_genre"));
+			ps.setString(3, user.get("ui_email"));
+			ps.setString(4, user.get("ui_phone1"));
+			ps.setString(5, user.get("ui_phone2"));
+			ps.setString(6, user.get("ui_address"));
+			ps.setString(7, user.get("ui_hint"));
+			ps.setString(8, user.get("ui_answer"));
+			ps.setString(9, user.get("ui_num"));
+			cnt = ps.executeUpdate();
+			con.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBConn.close(con,ps);
+		}
+		return cnt;
 	}
 
 	@Override

@@ -38,7 +38,6 @@
 			</label>
 <%
 Map<String,String> rMap = (Map<String,String>)request.getAttribute("rMap");
-out.println("rMap : " + rMap + "<br>");
 if(rMap!=null){
 	out.println("<br><b><code>" + rMap.get("msg") + "</code></b>");
 }
