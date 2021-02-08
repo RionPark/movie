@@ -74,10 +74,13 @@ public class UserServlet extends HttpServlet{
 				return;
 			}
 			user.put("ui_id", pUser.get("ui_id"));
-			rMap = userService.login(user);
-			if("0".equals(rMap.get("result"))) {
-				rMap.put("msg", "비밀번호를 다시 입력해주시기 바랍니다.");
+			rMap = userService.deleteUser(user);
+			if("0".equals(rMap.get("result"))){
 				path = "/views/user/info";
+			}else {
+				session.invalidate();
+				response.sendRedirect("/");
+				return;
 			}
 		}
 		request.setAttribute("rMap", rMap);

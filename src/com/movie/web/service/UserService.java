@@ -10,5 +10,5 @@ public interface UserService {
 	Map<String,String> login(Map<String,String> user);
 	Map<String,String> insertUser(Map<String,String> user);
 	Map<String,String> updateUser(Map<String,String> user);
-	Map<String,String> deleteUser(int uiNum);
+	Map<String,String> deleteUser(Map<String,String> user);
 }

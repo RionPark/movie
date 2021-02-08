@@ -51,9 +51,21 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Map<String, String> deleteUser(int uiNum) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, String> deleteUser(Map<String,String> user) {
+		Map<String, String> rMap = userDAO.selectUser(user);
+		if(rMap==null) {
+			rMap = new HashMap<>();
+			rMap.put("msg", "비밀번호가 틀렸습니다.");
+			rMap.put("result", "0");
+		}else {
+			int uiNum = Integer.parseInt(rMap.get("ui_num"));
+			int cnt = userDAO.deleteUser(uiNum);
+			if(cnt!=1) {
+				rMap.put("msg", "회원 탈퇴가 실패하였습니다.");
+				rMap.put("result", "0");
+			}
+		}
+		return rMap;
 	}
 
 	@Override

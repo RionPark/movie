@@ -29,7 +29,7 @@ Map<String,String> rMap = (Map<String,String>)request.getAttribute("rMap");
 			</form>
 		</div>
 <%
-if(rMap!=null){
+if(rMap!=null && rMap.get("msg")!=null){
 %>
 				<div><%=rMap.get("msg")%></div>
 <%

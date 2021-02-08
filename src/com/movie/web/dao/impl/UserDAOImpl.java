@@ -140,8 +140,21 @@ public class UserDAOImpl implements UserDAO{
 
 	@Override
 	public int deleteUser(int uiNum) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "delete from user_info where ui_num=?";
+		Connection con = DBConn.getConn();
+		PreparedStatement ps = null;
+		int cnt = 0;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, uiNum);
+			cnt = ps.executeUpdate();
+			con.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBConn.close(con,ps);
+		}
+		return cnt;
 	}
 
 	@Override
