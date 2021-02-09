@@ -40,7 +40,7 @@ public class UserServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
 		String cmd = MapConvert.getCmd(request.getRequestURI());
-		Map<String,String> user = MapConvert.getMap(request.getParameterMap());
+		Map<String,String> user = MapConvert.getMap(request);
 		Map<String,String> rMap = new HashMap<>();
 		String path = "/views/user/login";
 		if("login".equals(cmd)) {

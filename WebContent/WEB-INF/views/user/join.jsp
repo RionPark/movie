@@ -147,6 +147,10 @@
 										<input type="text" class="form-control"
 											placeholder="답변을 입력하세요" name="ui_answer" id="answer" />
 									</div>
+									<div class="form-group">
+										<input type="file" class="form-control"
+											name="ui_img" id="ui_img" />
+									</div>
 									<input type="submit" class="btnRegister" value="회원가입완료" />
 								</div>
 							</div>

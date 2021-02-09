@@ -45,6 +45,7 @@ public class UserDAOImpl implements UserDAO{
 				rUser.put("ui_email", rs.getString("ui_email"));
 				rUser.put("ui_hint", rs.getString("ui_hint"));
 				rUser.put("ui_answer", rs.getString("ui_answer"));
+				rUser.put("ui_img", rs.getString("ui_img"));
 				return rUser;
 			}
 		}catch(Exception e) {
@@ -71,10 +72,10 @@ public class UserDAOImpl implements UserDAO{
 				"CREDAT,\r\n" + 
 				"CRETIM,\r\n" + 
 				"MODDAT,\r\n" + 
-				"MODTIM)";
+				"MODTIM,ui_img)";
 		sql += " values(seq_ui_num.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, to_char(sysdate,'YYYYMMDD'),\r\n" + 
 				"TO_CHAR(SYSDATE,'HH24MISS'),to_char(sysdate,'YYYYMMDD'),\r\n" + 
-				"TO_CHAR(SYSDATE,'HH24MISS'))";
+				"TO_CHAR(SYSDATE,'HH24MISS'),?)";
 		Connection con = DBConn.getConn();
 		PreparedStatement ps = null;
 		int cnt = 0;
@@ -90,6 +91,7 @@ public class UserDAOImpl implements UserDAO{
 			ps.setString(8, user.get("ui_address"));
 			ps.setString(9, user.get("ui_hint"));
 			ps.setString(10, user.get("ui_answer"));
+			ps.setString(11, user.get("ui_img"));
 			cnt = ps.executeUpdate();
 			con.commit();
 		}catch(Exception e) {
@@ -185,6 +187,7 @@ public class UserDAOImpl implements UserDAO{
 				rUser.put("ui_email", rs.getString("ui_email"));
 				rUser.put("ui_hint", rs.getString("ui_hint"));
 				rUser.put("ui_answer", rs.getString("ui_answer"));
+				rUser.put("ui_img", rs.getString("ui_img"));
 				return rUser;
 			}
 		}catch(Exception e) {

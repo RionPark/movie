@@ -6,12 +6,11 @@ import java.util.Map;
 public class TimeTest {
 
 	public static void main(String[] args) {
-		Map<String,String[]> params = new HashMap<>();
-		String[] strs = params.get("genre");
-		String str = "";
-		for(int i=0;i<strs.length;i++) {
-			str += strs[i];
-		}
-		System.out.println(str);
+		long nano = System.nanoTime();
+		System.out.println(nano);
+		nano = System.nanoTime();
+		System.out.println(nano);
+		nano = System.nanoTime();
+		System.out.println(nano);
 	}
 }
