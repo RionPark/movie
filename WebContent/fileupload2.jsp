@@ -13,12 +13,12 @@
 </head>
 <body>
 <form method="post" enctype="multipart/form-data" action="/file/test">
-	<input type="file" name="f1"><br>
-	<input type="file" name="f2"><br>
-	<input type="file" name="f3"><br>
-	<input type="file" name="f4"><br>
-	<input type="text" name="t1"><br>
-	<input type="text" name="t2"><br>
+	<input type="file" name="file1"><br>
+	<input type="file" name="file2"><br>
+	<input type="file" name="file3"><br>
+	<input type="file" name="file4"><br>
+	<input type="text" name="text1"><br>
+	<input type="text" name="text2"><br>
 	<button>전송</button>
 </form>
 </body>
