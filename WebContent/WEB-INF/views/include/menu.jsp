@@ -47,6 +47,13 @@ if(user==null){
           <li class="nav-item">
 			<a class="nav-link" href="/user/logout">로그아웃</a>
 		  </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/theater/list" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">극장관리</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="/views/theater/insert">극장등록</a>
+              <a class="dropdown-item" href="/theater/list">극장리스트</a>
+            </div>
+          </li>
 <%
 }
 %>

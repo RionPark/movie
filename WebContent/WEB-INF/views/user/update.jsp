@@ -76,7 +76,7 @@ Map<String, String> user = (Map<String, String>)session.getAttribute("user");
    <div class="container register">
       <div class="row">
          <div class="col-md-3 register-left">
-            <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
+            <img src="/upload/<%=user.get("ui_img")%>" alt="" style="width:200" class="rounded-circle"/>
             <h3><%=user.get("ui_name")%>님<br> 안녕하세요</h3>
          </div>
          <div class="col-md-9 register-right">
@@ -146,6 +146,10 @@ Map<String, String> user = (Map<String, String>)session.getAttribute("user");
                            <div class="form-group">
                               <input type="text" class="form-control"
                                  placeholder="답변을 입력하세요" name="ui_answer" id="answer" value="<%=user.get("ui_answer")%>"/>
+                           </div>
+                           <div class="form-group">
+                              <input type="file" class="form-control"
+                                  name="ui_img" id="img" value="<%=user.get("ui_img")%>"/>
                            </div>
                            <input type="submit" class="btnRegister" value="정보수정" />
                         </div>

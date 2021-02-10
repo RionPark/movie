@@ -29,4 +29,12 @@
     <servlet-name>FileServlet</servlet-name>
     <url-pattern>/file/*</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>TheaterServlet</servlet-name>
+    <servlet-class>com.movie.web.servlet.TheaterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TheaterServlet</servlet-name>
+    <url-pattern>/theater/*</url-pattern>
+  </servlet-mapping>
 </web-app>
