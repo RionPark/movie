@@ -34,11 +34,18 @@ public class TheaterServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String cmd = MapConvert.getCmd(request.getRequestURI());
 		Map<String,String> theater = MapConvert.getMap(request);
+		String path = "/views/theater/insert";
 		if("insert".equals(cmd)) {
 			Map<String,String> rMap = theaterService.insertTheater(theater);
 			request.setAttribute("rMap", rMap);
+		}else if("delete".equals(cmd)) {
+			int tiNum = Integer.parseInt(theater.get("ti_num"));
+			Map<String,String> rMap = theaterService.deleteTheater(tiNum);
+			request.setAttribute("rMap", rMap);
+			response.sendRedirect("/theater/list");
+			return;
 		}
-		ViewServlet.goPage(request, response, "/views/theater/insert");
+		ViewServlet.goPage(request, response,path);
 	}
 
 }

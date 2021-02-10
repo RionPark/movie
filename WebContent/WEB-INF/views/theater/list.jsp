@@ -47,6 +47,14 @@ for(Map<String,String> theater:theaterList){
 function goView(tiNum){
 	location.href='/theater/view?ti_num=' + tiNum;
 }
+<%
+Map<String,String> rMap = (Map<String,String>) request.getAttribute("rMap");
+if(rMap!=null && rMap.get("msg")!=null){
+%>
+	alert("<%=rMap.get("msg")%>");
+<%
+}
+%>
 </script>
 </body>
 </html>

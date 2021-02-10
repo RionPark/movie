@@ -101,7 +101,20 @@ public class TheaterDAOImpl implements TheaterDAO {
 
 	@Override
 	public int deleteTheater(int tiNum) {
-		// TODO Auto-generated method stub
+		String sql = "delete from theater_info where ti_num=?";
+		Connection con = DBConn.getConn();
+		PreparedStatement ps = null;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, tiNum);
+			int cnt = ps.executeUpdate();
+			con.commit();
+			return cnt;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBConn.close(con,ps);
+		}
 		return 0;
 	}
 	public static void main(String[] args) {

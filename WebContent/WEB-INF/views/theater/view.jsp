@@ -27,8 +27,20 @@ Map<String,String> theater = (Map<String,String>) request.getAttribute("theater"
 			</div>
 			<div class="text-center">
 				<button class="btn btn-outline-success my-2 my-sm-0" onclick="goPage('/theater/update?ti_num=<%=theater.get("ti_num")%>')">수정하기</button>
-				<button class="btn btn-outline-danger my-2 my-sm-0" onclick="doShow(this)">삭제하기</button>
+				<button class="btn btn-outline-danger my-2 my-sm-0" onclick="doDelete()">삭제하기</button>
 			</div>
 		</div>
+		<form id="deleteForm" action="/theater/delete" method="post">
+			<input type="hidden" name="ti_num" value="<%=theater.get("ti_num")%>">
+		</form>
+<script>
+function doDelete(){
+	var isDelete = confirm("해당 극장 정보를 정말로 삭제 하시겠습니까?");
+	if(isDelete){
+		var deleteForm = document.querySelector('#deleteForm');
+		deleteForm.submit();
+	}
+}
+</script>
 </body>
 </html>

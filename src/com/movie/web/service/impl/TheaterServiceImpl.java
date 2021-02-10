@@ -41,8 +41,14 @@ public class TheaterServiceImpl implements TheaterService {
 
 	@Override
 	public Map<String, String> deleteTheater(int tiNum) {
-		// TODO Auto-generated method stub
-		return null;
+		int cnt = theaterDAO.deleteTheater(tiNum);
+		Map<String,String> rMap = new HashMap<>();
+		rMap.put("msg", "삭제 했슈~");
+		if(cnt!=1) {
+			rMap.put("msg", "까비~");
+		}
+		rMap.put("result", cnt+"");
+		return rMap;
 	}
 	public static void main(String[] args) {
 		TheaterService tService = new TheaterServiceImpl();
