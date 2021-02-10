@@ -23,8 +23,12 @@ public class TheaterServlet extends HttpServlet {
 		if("list".equals(cmd)) {
 			List<Map<String,String>> theaterList = theaterService.selectTheaterList(theater);
 			request.setAttribute("theaterList", theaterList);
+		}else if("view".equals(cmd)) {
+			int tiNum = Integer.parseInt(theater.get("ti_num"));
+			Map<String,String> rTh =  theaterService.selectTheater(tiNum);
+			request.setAttribute("theater", rTh);
 		}
-		ViewServlet.goPage(request, response, "/views/theater/list");
+		ViewServlet.goPage(request, response, "/views" + request.getRequestURI());
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");

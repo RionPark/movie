@@ -18,8 +18,7 @@ public class TheaterServiceImpl implements TheaterService {
 
 	@Override
 	public Map<String, String> selectTheater(int tiNum) {
-		// TODO Auto-generated method stub
-		return null;
+		return theaterDAO.selectTheater(tiNum);
 	}
 
 	@Override
@@ -47,9 +46,7 @@ public class TheaterServiceImpl implements TheaterService {
 	}
 	public static void main(String[] args) {
 		TheaterService tService = new TheaterServiceImpl();
-		List<Map<String,String>> theaterList = tService.selectTheaterList(null);
-		for(Map<String,String>theater:theaterList) {
-			System.out.println(theater);
-		}
+
+		System.out.println(tService.selectTheater(6));
 	}
 }

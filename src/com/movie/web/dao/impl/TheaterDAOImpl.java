@@ -43,7 +43,30 @@ public class TheaterDAOImpl implements TheaterDAO {
 
 	@Override
 	public Map<String, String> selectTheater(int tiNum) {
-		// TODO Auto-generated method stub
+		String sql = "select ti_num, ti_name, ti_address, ti_phone1, ti_phone2 from theater_info";
+		sql += " where ti_num=?";
+		sql += " order by ti_num desc";
+		Connection con = DBConn.getConn();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, tiNum);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Map<String, String> th =new HashMap<>();
+				th.put("ti_num", rs.getString("ti_num"));
+				th.put("ti_name", rs.getString("ti_name"));
+				th.put("ti_address", rs.getString("ti_address"));
+				th.put("ti_phone1", rs.getString("ti_phone1"));
+				th.put("ti_phone2", rs.getString("ti_phone2"));
+				return th;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBConn.close(con,ps,rs);
+		}
 		return null;
 	}
 
@@ -83,9 +106,6 @@ public class TheaterDAOImpl implements TheaterDAO {
 	}
 	public static void main(String[] args) {
 		TheaterDAO tDAO = new TheaterDAOImpl();
-		List<Map<String,String>> theaterList = tDAO.selectTheaterList(null);
-		for(Map<String,String>theater:theaterList) {
-			System.out.println(theater);
-		}
+		System.out.println(tDAO.selectTheater(6));
 	}
 }
